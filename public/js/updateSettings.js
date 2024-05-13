@@ -5,7 +5,7 @@ import { showAlert } from './alert';
 // type is either 'password' or 'data'
 export const updateSettings = async (data, type) => {
   try {
-    console.log(data, type); // This should log on every call
+    // console.log(data, type); // This should log on every call
     const url =
       type === 'password'
         ? '/api/v1/users/updatePassword'
