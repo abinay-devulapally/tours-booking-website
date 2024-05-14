@@ -14,7 +14,6 @@
   "author": "Abinay Kumar Devulapally",
   "license": "ISC",
   "dependencies": {
-    "@img/sharp-win32-x64": "^0.33.3",
     "axios": "^1.6.8",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
