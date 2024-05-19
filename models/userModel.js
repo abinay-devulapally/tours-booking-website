@@ -59,7 +59,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// while importing dev data comment this -- start
+// while importing dev data comment this -- start to end
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
 

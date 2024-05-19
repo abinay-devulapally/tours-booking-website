@@ -38,6 +38,12 @@ exports.getLogin = (req, res) => {
   });
 };
 
+exports.signup = (req, res) => {
+  res.status(200).render('signup', {
+    title: 'signup',
+  });
+};
+
 exports.getAccount = (req, res) => {
   res.status(200).render('account', {
     title: 'My account',

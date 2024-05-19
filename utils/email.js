@@ -14,7 +14,16 @@ module.exports = class Email {
 
   createTransport() {
     if (process.env.NODE_ENV.trim() === 'production') {
-      return 1;
+      // To be implemented production mail sender
+      return nodemailer.createTransport({
+        host: process.env.EMAIL_HOST,
+        port: process.env.EMAIL_PORT,
+        auth: {
+          user: process.env.EMAIL_USERNAME,
+          pass: process.env.EMAIL_PASSWORD,
+        },
+      });
+      // Above transport is for development environment replace with production host and port
     }
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,

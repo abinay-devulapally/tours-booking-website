@@ -20,7 +20,7 @@ const bookingRouter = require('./routers/bookingRoutes');
 const app = express();
 
 // Enable 'trust proxy' to parse X-Forwarded-For header
-app.set('trust proxy', true);
+// app.set('trust proxy', true);
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -31,6 +31,9 @@ app.use(helmet({ contentSecurityPolicy: false }));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
+  console.log('IN DEVELOPMENT');
+} else {
+  console.log('IN PRODUCTION');
 }
 
 const limiter = rateLimit({
