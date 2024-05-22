@@ -675,6 +675,36 @@ body {
   fill: #bbb;
 }
 
+.reviews__textarea {
+    width: 100%;
+    height: 120px; /* Increase height */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 12px; /* Increase padding */
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+    font-weight: 400;
+    resize: vertical; /* Allow vertical resizing */
+}
+
+
+.reviews__save-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+.reviews__save-button:hover {
+  background-color: #0056b3;
+}
+
+
 .section-cta {
   margin-top: calc(0px - var(--section-rotate));
   padding: 3rem;

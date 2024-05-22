@@ -26,7 +26,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('trust proxy', true);
+// app.set('trust proxy', true);
 
 app.use(helmet({ contentSecurityPolicy: false }));
 

@@ -76,12 +76,20 @@ reviewSchema.post('save', function () {
 });
 
 reviewSchema.pre(/^findOneAnd/, async function (next) {
-  this.r = await this.findOne();
+  // this.r = await this.findOne();
+  // next();
+  this.r = await this.clone().findOne();
   next();
 });
 
 reviewSchema.post(/^findOneAnd/, async function () {
-  await this.r.constructor.calcAverageRatings(this.r.tour);
+  // Check if the document is already processed to avoid re-executing the query
+  if (this.r) {
+    await this.r.constructor.calcAverageRatings(this.r.tour);
+  } else {
+    // Handle the case where the document is not found
+    console.log('Document not found');
+  }
 });
 
 const Review = mongoose.model('Review', reviewSchema);
