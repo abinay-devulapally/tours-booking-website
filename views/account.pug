@@ -15,7 +15,7 @@ block content
                 ul.side-nav
                     +navitem('#', 'Setting', 'settings', true)
                     +navitem('/my-tours', 'My bookings', 'briefcase', false)
-                    +navitem('#', 'My reviews', 'star')
+                    +navitem('/my-reviews', 'My reviews', 'star')
                     +navitem('#', 'Billing', 'credit-card')
                 
                 - if (user.role === 'admin')

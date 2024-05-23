@@ -1,0 +1,11 @@
+extends base
+include _manageReviewCard
+
+block content
+    main.main 
+        .card-container
+        .reviews
+            each review,tourIndex in reviews
+                h1.heading-primary
+                    span= `${tourNames[tourIndex]} tour`
+                +manageReviewCard(review)

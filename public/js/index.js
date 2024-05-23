@@ -5,6 +5,7 @@ import { login, logout } from './login';
 import { signup } from './signup';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
+import { manageReview } from './review';
 
 // DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -78,3 +79,43 @@ if (bookBtn)
     const { tourId } = e.target.dataset;
     bookTour(tourId);
   });
+
+// Review editing functionality
+document.addEventListener('DOMContentLoaded', function () {
+  // Function to handle the star click events
+  function handleStarClick(stars, rating) {
+    stars.forEach(function (s, index) {
+      if (index < rating) {
+        s.classList.add('reviews__star--active');
+        s.classList.remove('reviews__star--inactive');
+      } else {
+        s.classList.remove('reviews__star--active');
+        s.classList.add('reviews__star--inactive');
+      }
+    });
+  }
+
+  // Find all review cards and add event listeners
+  document.querySelectorAll('.reviews__card').forEach(function (card) {
+    const stars = card.querySelectorAll('.reviews__star');
+    const saveButton = card.querySelector('.reviews__save-button');
+    const textarea = card.querySelector('.reviews__textarea');
+    const reviewId = card.getAttribute('data-review-id');
+
+    stars.forEach(function (star) {
+      star.addEventListener('click', function () {
+        const rating = parseInt(this.getAttribute('data-star'));
+        handleStarClick(stars, rating);
+      });
+    });
+
+    saveButton.addEventListener('click', function () {
+      const review = textarea.value;
+      const rating = card.querySelectorAll('.reviews__star--active').length;
+
+      manageReview(reviewId, { review, rating });
+
+      // Here, you can send the reviewText and rating to your server
+    });
+  });
+});
