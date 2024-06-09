@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "undefined/subscriptions/a422fb28-5aa9-4ce1-aabb-b5bc7ac1971d/resourceGroups/azurevm/providers/Microsoft.Web/sites/tours-booking-website",
+  "appService.deploySubpath": "."
+}
