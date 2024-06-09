@@ -1,4 +1,4 @@
-# Postman API Documentation: [https://documenter.getpostman.com/view/15814592/2sA3XLDiak](click here)
+# Postman API Documentation: [click here](https://documenter.getpostman.com/view/15814592/2sA3XLDiak)
 
 # BookMyTours API Documentation
 
