@@ -35,6 +35,7 @@ if (process.env.NODE_ENV === 'development') {
   console.log('IN DEVELOPMENT');
 } else {
   console.log('IN PRODUCTION');
+  app.set('trust proxy', true);
 }
 
 const limiter = rateLimit({
