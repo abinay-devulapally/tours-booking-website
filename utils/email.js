@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const { MailtrapClient } = require('mailtrap');
 const pug = require('pug');
 const htmlToText = require('html-to-text');
 
@@ -63,8 +64,67 @@ module.exports = class Email {
       'Your password reset token (valid for only 10 minutes)',
     );
   }
-};
 
+  async sendWelcomeActual() {
+    const TOKEN = process.env.EMAIL_MAILTRAP_TOKEN;
+    const ENDPOINT = process.env.EMAIL_MAILTRAP_ENDPOINT;
+
+    const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
+
+    const sender = {
+      email: 'mailtrap@demomailtrap.com',
+      name: 'Mailtrap Test',
+    };
+    const recipients = [
+      {
+        email: process.env.EMAIL_MAILTRAP_ADMIN,
+      },
+    ];
+
+    client
+      .send({
+        from: sender,
+        to: recipients,
+        template_uuid: process.env.MAILTRAP_TEMPLATE_ID,
+        template_variables: {
+          user_name: this.firstName,
+          next_step_link: this.url,
+          get_started_link: 'Test_Get_started_link',
+          onboarding_video_link: 'Test_Onboarding_video_link',
+        },
+      })
+      .then(console.log, console.error);
+  }
+
+  async sendPasswordResetActual() {
+    const TOKEN = process.env.EMAIL_MAILTRAP_TOKEN;
+    const ENDPOINT = process.env.EMAIL_MAILTRAP_ENDPOINT;
+
+    const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
+
+    const sender = {
+      email: 'mailtrap@demomailtrap.com',
+      name: 'Mailtrap Test',
+    };
+    const recipients = [
+      {
+        email: process.env.EMAIL_MAILTRAP_ADMIN,
+      },
+    ];
+
+    client
+      .send({
+        from: sender,
+        to: recipients,
+        template_uuid: 'a062167c-0c73-417e-9cc1-1b9c76ec52df',
+        template_variables: {
+          user_email: this.to,
+          pass_reset_link: this.url,
+        },
+      })
+      .then(console.log, console.error);
+  }
+};
 // const sendEmail = async (options) => {
 //   // create a transporter
 //   const transporter = nodemailer.createTransport({

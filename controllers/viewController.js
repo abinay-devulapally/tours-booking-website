@@ -39,6 +39,26 @@ exports.getLogin = (req, res) => {
   });
 };
 
+exports.forgotPassword = (req, res) => {
+  res.status(200).render('forgot-password', {
+    title: 'forgot-password',
+  });
+};
+
+exports.resetPassword = (req, res) => {
+  const { token } = req.params;
+  res.status(200).render('reset-password', {
+    title: 'reset-password',
+    token,
+  });
+};
+
+exports.resetPasswordAction = (req, res) => {
+  res.status(200).render('reset-password-action', {
+    title: 'reset-password',
+  });
+};
+
 exports.signup = (req, res) => {
   res.status(200).render('signup', {
     title: 'signup',

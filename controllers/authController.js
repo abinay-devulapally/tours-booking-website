@@ -46,6 +46,8 @@ exports.signup = catchAsync(async (req, res, next) => {
   // });
   const newUser = await User.create(req.body);
   const url = `${req.protocol}://${req.get('host')}/me`;
+
+  await new Email(newUser, url).sendWelcomeActual();
   await new Email(newUser, url).sendWelcome();
   createSendToken(newUser, 201, res);
 });
@@ -148,7 +150,7 @@ exports.restrictTo =
   };
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
-  // get usre based on posted email
+  // get user based on posted email
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
     return next(new AppError('There is no user with that email', 404));
@@ -162,13 +164,14 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     // sent it to user's email
     const resetURL = `${req.protocol}://${req.get(
       'host',
-    )}/api/v1/users/resetPassword/${resetToken}`;
+    )}/reset-password/${resetToken}`;
     // await sendEmail({
     //   email: user.email,
     //   subject: 'Your password reset token (valid for only 10 minutes)',
     //   message: `Forgot your password? Please use this token to reset your password: ${resetURL}`,
     // });
     await new Email(user, resetURL).sendPasswordReset();
+    await new Email(user, resetURL).sendPasswordResetActual();
     res.status(200).json({
       status: 'success',
       message: 'Token sent to email',
