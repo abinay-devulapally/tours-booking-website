@@ -8,6 +8,7 @@ const hpp = require('hpp');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -24,6 +25,18 @@ const app = express();
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
+//implement cors
+app.use(cors());
+
+//implement based on origin
+// app.use(
+//   cors({
+//     origin: 'https://www.natours.com',
+//   }),
+// );
+
+app.options('*', cors());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.set('trust proxy', true);
@@ -32,10 +45,11 @@ app.use(helmet({ contentSecurityPolicy: false }));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
+  app.set('trust proxy', true);
   console.log('IN DEVELOPMENT');
 } else {
   console.log('IN PRODUCTION');
-  app.set('trust proxy', true);
+  // app.enable('trust proxy');
 }
 
 const limiter = rateLimit({
