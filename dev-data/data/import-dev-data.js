@@ -7,6 +7,16 @@ const Review = require('../../models/reviewModel');
 
 dotenv.config({ path: '../../config.env' });
 
+//DB LOCAL CONNECTION
+// const DB_LOCAL = process.env.DATABASE_LOCAL;
+
+// mongoose
+//   .connect(DB_LOCAL)
+//   .then(() => console.log('LOCAL DB connection successful'))
+//   .catch((err) => console.error('LOCAL DB connection error:', err));
+
+//ONLINE DB CONNECTION
+
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
   process.env.DATABASE_PASSWORD,
@@ -23,11 +33,17 @@ mongoose
     console.log('DB connection successfull');
   });
 
-const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, 'utf-8'));
-const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
-const reviews = JSON.parse(
-  fs.readFileSync(`${__dirname}/reviews.json`, 'utf-8'),
-);
+let tours;
+let users;
+let reviews;
+
+try {
+  tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, 'utf-8'));
+  users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
+  reviews = JSON.parse(fs.readFileSync(`${__dirname}/reviews.json`, 'utf-8'));
+} catch (err) {
+  console.error('Error reading files:', err);
+}
 
 const importData = async () => {
   try {

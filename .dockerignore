@@ -1,0 +1,6 @@
+node_modules/
+.cache
+.vscode
+Dockerfile
+.dockerignore
+docker-compose.yml
