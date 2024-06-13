@@ -1,0 +1,1473 @@
+swagger: '2.0'
+info:
+  contact: {}
+  description: Tours booking website contain endpoints for Tours, Users, Authentication and Reviews
+  title: bookmytours
+  version: 1.0.0
+basePath: /api
+host: bookmytours.onrender.com
+
+securityDefinitions:
+  jwtHeaderAuth:
+    type: apiKey
+    in: header
+    name: Authorization
+    
+paths:
+  /:
+    get:
+      consumes:
+        - text/plain
+      parameters:
+        - in: body
+          name: body
+          schema:
+            format: binary
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Testing
+      description: New Request
+      operationId: newRequest
+      summary: New Request
+  /img/users/undefined:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Testing
+      description: http://127.0.0.1:3000/img/users/undefined
+      operationId: http1270013000ImgUsersUndefined
+      summary: http://127.0.0.1:3000/img/users/undefined
+  /tour/the-wine-taster:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Testing
+      description: https://tours-booking-website.azurewebsites.net/tour/the-wine-taster
+      operationId: httpsToursBookingWebsiteAzurewebsitesNetTourTheWineTaster
+      summary: https://tours-booking-website.azurewebsites.net/tour/the-wine-taster
+  /v1/booking/checkout-session/5c88fa8cf4afda39709c295d:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Testing
+      description: booking
+      operationId: booking
+      summary: booking
+  /v1/reviews/:
+    get:
+      consumes:
+        - text/plain
+      parameters:
+        - in: body
+          name: body
+          schema:
+            format: binary
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Reviews
+      description: |-
+        ### Get Reviews
+
+        This endpoint retrieves a list of reviews.
+
+        #### Request
+
+        - Method: GET
+            
+        - URL: `api/v1/reviews/`
+            
+
+        #### Response
+
+        The response for this request follows the JSON schema below:
+
+        ``` json
+        {
+          "type": "object",
+          "properties": {
+            "reviews": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "user": {
+                    "type": "string"
+                  },
+                  "rating": {
+                    "type": "number"
+                  },
+                  "comment": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+
+         ```
+      operationId: getAllReviews
+      summary: get all reviews
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              rating:
+                example: 5
+                type: number
+              review:
+                example: Great Tour
+                type: string
+              tour:
+                example: 5c88fa8cf4afda39709c2955
+                type: string
+              user:
+                example: 663cc2009d304f410456882e
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Reviews
+      description: |-
+        ## API Request:
+
+        This endpoint allows the client to submit a review for a tour. The request should be sent as an HTTP POST to the specified URL with the following parameters in the request body:
+
+        - `review` (string): The review content.
+            
+        - `rating` (number): The rating given for the tour.
+            
+        - `tour` (string): The identifier of the tour for which the review is being submitted.
+            
+        - `user` (string): The identifier of the user submitting the review.
+            
+
+        ## API Response:
+
+        The response for this request will be in JSON format and will follow the schema provided by the user.
+      operationId: createReviews
+      summary: create reviews
+  /v1/reviews/5c8a381714eb5c17645c9115:
+    get:
+      consumes:
+        - text/plain
+      parameters:
+        - in: body
+          name: body
+          schema:
+            format: binary
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Reviews
+      description: |-
+        ### Retrieve Review Details
+
+        This endpoint retrieves the details of a specific review.
+
+        #### Request
+
+        - Method: GET
+            
+        - URL: `api/v1/reviews/5c8a381714eb5c17645c9115`
+            
+
+        #### Response
+
+        The response for this request is a JSON object representing the details of the review, following the schema below:
+
+        ``` json
+        {
+          "type": "object",
+          "properties": {
+            "reviewId": {
+              "type": "string"
+            },
+            "productId": {
+              "type": "string"
+            },
+            "userId": {
+              "type": "string"
+            },
+            "rating": {
+              "type": "number"
+            },
+            "comment": {
+              "type": "string"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+
+         ```
+      operationId: getOneReview
+      summary: get one review
+    patch:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              rating:
+                example: 4
+                type: number
+              review:
+                example: Nice Tour
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Reviews
+      description: |-
+        ### Update Review
+
+        This endpoint is used to update a specific review by making an HTTP PATCH request to the given URL.
+
+        #### Request Body
+
+        - `review` (string): The updated review content.
+            
+        - `rating` (number): The updated rating for the review.
+            
+
+        #### Response
+
+        The response for this request is a JSON object conforming to the following schema:
+
+        ``` json
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "review": {
+                  "type": "string"
+                },
+                "rating": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+
+         ```
+
+        The response includes a `status` field indicating the status of the request, a `message` field with a descriptive message, and a `data` field containing the updated review details including the `id`, `review`, and `rating`.
+      operationId: updateReviews
+      summary: update reviews
+  /v1/reviews/663f1013d88d3c868069a74e:
+    delete:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Reviews
+      description: |-
+        ### Delete Review
+
+        This endpoint is used to delete a specific review identified by its unique ID.
+
+        #### Request
+
+        - Method: DELETE
+            
+        - URL: `api/v1/reviews/663f1013d88d3c868069a74e`
+            
+
+        #### Response
+
+        The response of this request is a JSON schema. It does not include a response body.
+      operationId: deleteReviews
+      summary: delete reviews
+  /v1/tours:
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              difficulty:
+                example: easy
+                type: string
+              duration:
+                example: 5
+                type: number
+              durationWeeks:
+                example: 0.7142857142857143
+                type: number
+              guides:
+                example:
+                  - 663eff980481b89df8c95bd0
+                  - 663cc2009d304f410456882e
+                items:
+                  example: 663eff980481b89df8c95bd0
+                  type: string
+                type: array
+              imageCover:
+                example: tour-1-cover.jpg
+                type: string
+              maxGroupSize:
+                example: 25
+                type: number
+              name:
+                example: Test Tour 3
+                type: string
+              price:
+                example: 397
+                type: number
+              rating:
+                example: 4.5
+                type: number
+              ratingsAverage:
+                example: 4.7
+                type: number
+              ratingsQuantity:
+                example: 37
+                type: number
+              summary:
+                example: Breathtaking hike through the Canadian Banff National Park
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Tours
+      description: |
+
+        The API endpoint `POST api/v1/tours` is used to create a new tour. The request should include the following payload in the raw request body type:
+
+        ```json
+        {
+          "name": "",
+          "rating": 0,
+          "ratingsAverage": 0,
+          "ratingsQuantity": 0,
+          "duration": 0,
+          "maxGroupSize": 0,
+          "difficulty": "",
+          "price": 0,
+          "summary": "",
+          "imageCover": "",
+          "durationWeeks": 0,
+          "guides": [""]
+        }
+        ```
+
+        ### Response
+        The response of this request is a JSON schema representing the newly created tour. The specific structure of the response will depend on the API implementation and the server's response. Please refer to the API documentation or server documentation for the detailed JSON schema of the response.
+      operationId: createNewTour
+      summary: Create New Tour
+  /v1/tours/:
+    get:
+      parameters:
+        - in: query
+          name: difficulty
+          type: string
+        - in: query
+          name: limit
+          type: string
+        - in: query
+          name: page
+          type: string
+        - in: query
+          name: fields
+          type: string
+        - in: query
+          name: sort
+          type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Tours
+      description: |-
+        ## Get Tours
+
+        This endpoint makes an HTTP GET request to retrieve a list of tours.
+
+        ### Request Body
+
+        This request does not require a request body.
+
+        ### Response
+
+        - Status: 200
+        - Content-Type: application/json
+            
+
+        #### Response Body
+
+        The response will contain a JSON object with the following properties:
+
+        - `status` (string): The status of the response.
+        - `results` (number): The number of results returned.
+        - `data` (object): The data object containing an array of tour documents.
+            - `doc` (array): An array of tour documents, each containing the following properties:
+                - `startLocation` (object): The start location of the tour.
+                - `rating` (number): The overall rating of the tour.
+                - `ratingsAverage` (number): The average rating of the tour.
+                - `ratingsQuantity` (number): The quantity of ratings for the tour.
+                - `images` (array): An array of images for the tour.
+                - `startDates` (array): An array of start dates for the tour.
+                - `guides` (array): An array of tour guides, each containing:
+                    - `role` (string): The role of the guide.
+                    - `_id` (string): The ID of the guide.
+                    - `name` (string): The name of the guide.
+                    - `email` (string): The email of the guide.
+                - `_id` (string): The ID of the tour.
+                - `name` (string): The name of the tour.
+                - `duration` (number): The duration of the tour.
+                - `maxGroupSize` (number): The maximum group size for the tour.
+                - `difficulty` (string): The difficulty level of the tour.
+                - `price` (number): The price of the tour.
+                - `summary` (string): A summary of the tour.
+                - `description` (string): A description of the tour.
+                - `imageCover` (string): The cover image for the tour.
+                - `locations` (array): An array of tour locations, each containing:
+                    - `type` (string): The type of location.
+                    - `coordinates` (array): The coordinates of the location.
+                    - `_id` (string): The ID of the location.
+                    - `description` (string): The description of the location.
+                    - `day` (number): The day of the tour for the location.
+                - `durationWeeks` (number): The duration of the tour in weeks.
+                - `id` (string): The ID of the tour.
+      operationId: getAllTours
+      summary: Get All Tours
+  /v1/tours/5c88fa8cf4afda39709c2955:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Tours
+      description: |
+
+        This endpoint makes an HTTP GET request to retrieve information about a specific tour with the ID "5c88fa8cf4afda39709c2955". The response will be in JSON format, and you can document the response as a JSON schema to understand the structure and data types of the returned information.
+      operationId: getTour
+      summary: Get Tour
+    patch:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              price:
+                example: 597
+                type: number
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Tours
+      description: |-
+        This endpoint allows you to update the price of a specific tour using the tour ID. The HTTP PATCH request should be made to the specified URL with the tour ID in the path parameter. The request body should contain the updated price in JSON format.
+
+        ### Request
+
+        - Method: PATCH
+            
+        - URL: api/v1/tours/5c88fa8cf4afda39709c2955
+            
+        - Body:
+            
+            ``` json
+            {
+              "price": 0
+            }
+            
+             ```
+            
+
+        ### Response
+
+        The response schema for this request is as follows:
+
+        ``` json
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "tour": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    ...
+                  }
+                }
+              }
+            }
+          }
+        }
+
+         ```
+      operationId: updateTour
+      summary: Update Tour
+  /v1/tours/5c88fa8cf4afda39709c2955/reviews:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Reviews
+      description: |-
+        ### Get Tour Reviews
+
+        This endpoint retrieves the reviews for a specific tour.
+
+        #### Request
+
+        - Method: GET
+            
+        - URL: `api/v1/tours/5c88fa8cf4afda39709c2955/reviews`
+            
+
+        #### Response
+
+        The response for this request can be documented using the following JSON schema:
+
+        ``` json
+        {
+          "type": "object",
+          "properties": {
+            "reviews": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "reviewId": {
+                    "type": "string"
+                  },
+                  "user": {
+                    "type": "string"
+                  },
+                  "rating": {
+                    "type": "number"
+                  },
+                  "comment": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+
+         ```
+      operationId: getReviewsByTour
+      summary: get reviews by tour
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              rating:
+                example: 2
+                type: number
+              review:
+                example: This is bad
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Reviews
+      description: |-
+        ### POST /api/v1/tours/5c88fa8cf4afda39709c2955/reviews
+
+        This endpoint allows the creation of a new review for a specific tour.
+
+        #### Request Body
+
+        - `review` (string, required): The review content.
+            
+        - `rating` (number, required): The rating given to the tour.
+            
+
+        #### Response
+
+        The response will be a JSON object conforming to the following schema:
+
+        ``` json
+        {
+          "reviewId": "string",
+          "tourId": "string",
+          "user": {
+            "userId": "string",
+            "username": "string"
+          },
+          "review": "string",
+          "rating": "number",
+          "createdAt": "string"
+        }
+
+         ```
+      operationId: createReviewsByTour
+      summary: create reviews by tour
+  /v1/tours/663cc8e4f7d3fe0ae09ff503:
+    delete:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Tours
+      description: |-
+        ### Delete Tour
+
+        This endpoint is used to delete a specific tour.
+
+        #### Request
+
+        - Method: DELETE
+            
+        - URL: `api/v1/tours/663cc8e4f7d3fe0ae09ff503`
+            
+
+        #### Response
+
+        The response for this request is a JSON schema representing the deleted tour.
+      operationId: deleteTour
+      summary: Delete Tour
+  /v1/tours/monthly-plan/2021:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Tours
+      description: |-
+        ### Get Monthly Plan for Tours
+
+        This endpoint makes an HTTP GET request to retrieve the monthly plan for tours for the year 2021.
+
+        #### Request
+
+        The request does not require a request body. The URL should be appended with `/api/v1/tours/monthly-plan/2021` to fetch the monthly plan for the year 2021.
+
+        #### Response
+
+        The response will be a JSON object with the following properties:
+
+        - `month`: (string) The month for which the plan is being retrieved.
+            
+        - `numTours`: (number) The number of tours scheduled for the month.
+            
+        - `numRatings`: (number) The total number of ratings for the month.
+            
+        - `avgRating`: (number) The average rating for the tours in the month.
+            
+
+        Example:
+
+        ``` json
+        {
+            "month": "January",
+            "numTours": 5,
+            "numRatings": 25,
+            "avgRating": 4.5
+        }
+
+         ```
+      operationId: getTourPlan
+      summary: Get Tour Plan
+  /v1/tours/top-5-cheap:
+    get:
+      parameters:
+        - in: query
+          name: price[gte]
+          type: string
+        - in: query
+          name: difficulty
+          type: string
+        - in: query
+          name: limit
+          type: string
+        - in: query
+          name: page
+          type: string
+        - in: query
+          name: fields
+          type: string
+        - in: query
+          name: sort
+          type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Tours
+      description: This endpoint makes an HTTP GET request to retrieve the top 5 cheap tours. The response of this request can be documented as a JSON schema to provide a structured overview of the data format and types returned by the API.
+      operationId: top5Cheap
+      summary: top-5-cheap
+  /v1/tours/tour-stats:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Tours
+      description: |-
+        ### GET /api/v1/tours/tour-stats
+
+        This endpoint retrieves the statistics for tours.
+
+        #### Request
+
+        No request body is required for this endpoint.
+
+        #### Response
+
+        The response will be a JSON object with the following properties:
+
+        - `tourStats`: An object containing statistics for tours, including the number of tours, the number of ratings, and the average rating.
+            
+
+        Example response:
+
+        ``` json
+        {
+            "tourStats": {
+                "numTours": 100,
+                "numRatings": 500,
+                "avgRating": 4.5
+            }
+        }
+
+         ```
+      operationId: getTourStats
+      summary: Get Tour Stats
+  /v1/users:
+    get:
+      security:
+        - jwtHeaderAuth: []
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Users
+      description: |-
+        ### Get Users
+
+        This endpoint makes an HTTP GET request to retrieve a list of users.
+
+        #### Request
+
+        No request body is required for this request. The JWT token must be included in the `Authorization` header in the following format:
+
+        ```http
+        Authorization: Bearer <JWT token from cookie>
+        ```
+
+        #### Response
+
+        The response will be a JSON object with an array of user objects. Each user object will contain the following properties:
+
+        - `id` (string) - The unique identifier for the user.
+            
+        - `name` (string) - The name of the user.
+            
+        - `email` (string) - The email address of the user.
+            
+
+        Example response:
+
+        ``` json
+        [
+            {
+                "id": "123",
+                "name": "John Doe",
+                "email": "johndoe@example.com"
+            },
+            {
+                "id": "456",
+                "name": "Jane Smith",
+                "email": "janesmith@example.com"
+            }
+        ]
+
+         ```
+      operationId: getAllUsers
+      summary: Get All Users
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              email:
+                example: guide@gmail.com
+                type: string
+              name:
+                example: guide
+                type: string
+              password:
+                example: pass@123
+                type: string
+              passwordConfirm:
+                example: pass@123
+                type: string
+              role:
+                example: guide
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Users
+      description: |-
+        ### Create a New User
+
+        This endpoint allows you to create a new user by sending a POST request to the specified URL.
+
+        #### Request Body
+
+        - `role` (string, required): The role of the user.
+            
+        - `name` (string, required): The name of the user.
+            
+        - `email` (string, required): The email address of the user.
+            
+        - `password` (string, required): The password for the user account.
+            
+        - `passwordConfirm` (string, required): The confirmation of the password.
+        
+        #### Request
+
+        No request body is required for this request. The JWT token must be included in the `Authorization` header in the following format:
+
+        ```http
+        Authorization: Bearer <JWT token from cookie>
+        ```
+            
+
+        #### Response
+
+        The response for this request is a JSON object conforming to the following schema:
+
+        ``` json
+        {
+          "type": "object",
+          "properties": {
+            "userId": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+
+         ```
+      operationId: createNewUser
+      summary: Create New User
+  /v1/users/5c8a1d5b0190b214360dc057:
+    patch:
+      security:
+        - jwtHeaderAuth: []
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              name:
+                example: Abinay Kumar Devulapally
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Users
+      description: |-
+        This HTTP PATCH request is used to update a specific user's information. The request should be made to api/v1/users/5c8a1d5b0190b214360dc057 with a JSON payload in the raw request body type. The payload should include the updated user information, such as the user's name.
+
+        ### Request Body
+
+        - name (string, required): The updated name of the user.
+        
+        ```http
+        Authorization: Bearer <JWT token from cookie>
+        ```
+            
+
+        ### Response
+
+        The response of this request will follow a JSON schema. It will include the updated user information or a success message upon successful update.
+      operationId: updateUser
+      summary: Update User
+  /v1/users/663cc28094986e0ffcecdcfe:
+    get:
+      security:
+        - jwtHeaderAuth: []
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Users
+      description: |-
+        ### Retrieve User Details
+
+        This endpoint makes an HTTP GET request to retrieve the details of a specific user.
+
+        #### Request
+        
+
+        The request does not require a request body. It includes the following parameter:
+
+        - `user_id` (path parameter, required): The unique identifier of the user for whom the details are being retrieved.
+        
+        ```http
+        Authorization: Bearer <JWT token from cookie>
+        ```
+            
+
+        Example:
+
+        ```
+        api/v1/users/663cc28094986e0ffcecdcfe
+
+         ```
+
+        #### Response
+
+        The response will be a JSON object with the following schema:
+
+        ``` json
+        {
+          "type": "object",
+          "properties": {
+            "user_id": {
+              "type": "string"
+            },
+            "username": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string",
+              "format": "date-time"
+            }
+            // Additional properties may be included based on the user details
+          }
+        }
+
+         ```
+      operationId: getUser
+      summary: Get User
+  /v1/users/deleteMe:
+    delete:
+      security:
+        - jwtHeaderAuth: []
+      consumes:
+        - text/plain
+      parameters:
+        - in: body
+          name: body
+          schema:
+            format: binary
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Users
+      description: |-
+        ### Delete User Account
+
+        This endpoint is used to delete the user's own account.
+
+        #### Request Body
+
+        - No request body is required for this request.
+        ```http
+        Authorization: Bearer <JWT token from cookie>
+        ```
+
+        #### Response
+
+        The response for this request is a JSON object with the following schema:
+
+        ``` json
+        {
+          "message": "string"
+        }
+
+         ```
+
+        - `message` (string): A message indicating the status of the account deletion process.
+      operationId: deleteUserProfile
+      summary: delete user profile
+  /v1/users/forgotPassword:
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              email:
+                example: test@gmail.com
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Authentication
+      description: |2+
+
+          
+        ### Request Description
+        This endpoint is used to initiate the process of resetting a user's password by sending a reset link to the provided email address.
+
+        #### Request Body
+        - email (string, required): The email address for which the password reset link will be sent.
+
+        ### Response
+        The response for this request is a JSON object with the following schema:
+
+        ```json
+        {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+        ```
+
+        The response will contain a message indicating the status of the password reset link sending process.
+
+      operationId: forgotPassword
+      summary: forgot Password
+  /v1/users/:id:
+    delete:
+      security:
+        - jwtHeaderAuth: []
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Users
+      description: |-
+        ### Delete User by ID
+
+        This endpoint is used to delete a specific user by their ID.
+
+        #### Request
+
+        - Method: DELETE
+            
+        - URL: `api/v1/users/id`
+            
+        - Path Parameters
+            - `id`: The unique identifier of the user to be deleted.
+        
+        - 
+        ```http
+        Authorization: Bearer <JWT token from cookie>
+        ```
+                
+
+        #### Response
+
+        The response for this request is a JSON schema representing the success or failure of the deletion operation. The schema includes the following properties:
+
+        - `message`: A string indicating the outcome of the deletion operation.
+            
+        - `status`: A boolean value representing the success (`true`) or failure (`false`) of the deletion.
+            
+
+        Example Response:
+
+        ``` json
+        {
+          "message": "User deleted successfully",
+          "status": true
+        }
+
+         ```
+      operationId: deleteUser
+      summary: Delete User
+  /v1/users/login:
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              email:
+                example: ayls@example.com
+                type: string
+              password:
+                example: ''
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Authentication
+      description: |-
+        ### Login User
+
+        This endpoint allows users to log in by providing their email and password.
+
+        #### Request Body
+
+        - `email` (string, required): The email address of the user.
+            
+        - `password` (string, required): The password of the user.
+            
+
+        #### Response
+
+        Upon a successful login, the response will include the user's authentication token and basic user information.
+      operationId: login
+      summary: login
+  /v1/users/me:
+    get:
+      security:
+        - jwtHeaderAuth: []
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Users
+      description: |-
+        # Retrieve Current User Details
+
+        This endpoint is used to retrieve the details of the current user.
+
+        ## Request
+
+        - Method: GET
+            
+        - URL: api/v1/users/me
+        
+        ```http
+        Authorization: Bearer <JWT token from cookie>
+        ```
+            
+
+        ## Response
+
+        The response for this request can be described using the following JSON schema:
+
+        ``` json
+        {
+          "type": "object",
+          "properties": {
+            "userId": {
+              "type": "string"
+            },
+            "username": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+
+         ```
+      operationId: getMe
+      summary: Get Me
+  /v1/users/resetPassword/be9ff4f1f67654a4201679c8fd50047e183a413714a39b551c4018ef817e2a24:
+    patch:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              password:
+                example: newuser1@123
+                type: string
+              passwordConfirm:
+                example: newuser1@123
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Authentication
+      description: |-
+        ### Reset User Password
+
+        This endpoint allows the user to reset their password by providing a new password and confirming it.
+
+        #### Request
+
+        - Method: PATCH
+            
+        - URL: `api/v1/users/resetPassword/be9ff4f1f67654a4201679c8fd50047e183a413714a39b551c4018ef817e2a24`
+            
+        - Body:
+            
+            ``` json
+            {
+              "password": "",
+              "passwordConfirm": ""
+            }
+            
+             ```
+            
+
+        #### Response
+
+        The response for this request is a JSON schema, which will be documented as per the API response format.
+      operationId: resetpassword
+      summary: resetPassword
+  /v1/users/signup:
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              email:
+                example: test1@gmail.com
+                type: string
+              name:
+                example: test1
+                type: string
+              password:
+                example: ''
+                type: string
+              passwordConfirm:
+                example: ''
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Authentication
+      description: |-
+        The `POST /api/v1/users/signup` endpoint is used to create a new user account. The request should include the user's name, email, password, and password confirmation in the request body.
+
+        ### Request Body
+
+        - `name` (string, required): The user's name.
+            
+        - `email` (string, required): The user's email address.
+            
+        - `password` (string, required): The user's chosen password.
+            
+        - `passwordConfirm` (string, required): Confirmation of the user's chosen password.
+            
+
+        ### Response (JSON Schema)
+
+        ``` json
+        {
+          "type": "object",
+          "properties": {
+            "userId": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            }
+          },
+          "required": ["userId", "name", "email"]
+        }
+
+         ```
+      operationId: signup
+      summary: signup
+  /v1/users/updateMe:
+    patch:
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: query
+          name: photo
+          type: string
+        - format: binary
+          in: formData
+          name: photo
+          type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Testing
+      description: Update user profile Copy
+      operationId: updateUserProfileCopy
+      summary: Update user profile Copy
+  /v1/users/updatePassword:
+    patch:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              confirmNewPassword:
+                example: pass@123
+                type: string
+              currentPassword:
+                example: newuser1@123
+                type: string
+              newPassword:
+                example: pass@123
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Authentication
+      description: |-
+        ### Update User Password
+
+        This API endpoint is used to update the password for a user.
+
+        #### Request Body
+
+        - `currentPassword` (string, required): The current password of the user.
+            
+        - `newPassword` (string, required): The new password that the user wants to set.
+            
+        - `confirmNewPassword` (string, required): Confirmation of the new password.
+            
+
+        #### Response
+
+        The response for this request follows the JSON schema below:
+
+        ``` json
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+
+         ```
+      operationId: updatepassword
+      summary: updatePassword
+tags:
+  - description: This folder gives overview on tour controllers.
+    name: Tours
+  - description: This folder gives overview on users controllers.
+    name: Users
+  - description: This folder gives overview on authentication controllers.
+    name: Authentication
+  - description: This folder gives overview on review controllers.
+    name: Reviews
+  - name: Testing
